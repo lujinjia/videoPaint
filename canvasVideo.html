@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvasVideo</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+</head>
+<body>
+    <div style="position: relative; width: 800px; height: 640px;" >
+        <video id="video" height="100%" width="95%"></video>
+        <canvas id="videoCanvas" style="position: absolute;left: 0.1px; height: 100%; width: 95%; border: 1px solid #ccc">
+            不支持canvas
+        </canvas>
+    </div>
+
+    <div style="float: left;">
+        <button onclick="beginPath()">开始绘制</button>
+        <button onclick="endPath()">结束绘制</button>
+    </div>
+
+    <div>
+        选中的坐标:
+        <span id="x"></span>
+        ,
+        <span id="y"></span>
+    </div>
+</body>
+
+<script src="js/canvasVideo.js"></script>
+
+</html>
