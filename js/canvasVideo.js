@@ -50,14 +50,10 @@ function mouseDown (event){
 
     isPaint = true;
 
-    let box = canvas.getBoundingClientRect();
-
-    //相对于canvas画布的位置
-    let x = (event.pageX - box.left) * (canvas.width / box.width);
-    let y = (event.pageY - box.top) * (canvas.height / box.height);
+    let point = getPosition(event);
 
     //设置起始点
-    setStartPoint(x, y);
+    setStartPoint(point.x, point.y);
 
 }
 
@@ -66,15 +62,12 @@ function mouseDown (event){
 function mouseMove (event){
 
     if(isPaint) {
-        let box = canvas.getBoundingClientRect();
 
-        //相对于canvas画布的位置
-        let x = (event.pageX - box.left) * (canvas.width / box.width);
-        let y = (event.pageY - box.top) * (canvas.height / box.height);
+        let point = getPosition(event);
 
         let startPoint = getStartPoint();
-        let width = (x- startPoint.x);
-        let height = (y - startPoint.y);
+        let width = (point.x- startPoint.x);
+        let height = (point.y - startPoint.y);
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.strokeRect(startPoint.x, startPoint.y, width, height);
@@ -86,17 +79,7 @@ function mouseMove (event){
 //鼠标松开事件
 function mouseUp (event) {
 
-    let box = canvas.getBoundingClientRect();
-
-    //相对于canvas画布的位置
-    let x = (event.pageX - box.left) * (canvas.width / box.width);
-    let y = (event.pageY - box.top) * (canvas.height / box.height);
-
-
-    let endPoint = {
-        x: x,
-        y: y
-    };
+    let endPoint = getPosition(event);
 
     let startPoint = getStartPoint();
     let width = (endPoint.x - startPoint.x);
@@ -107,9 +90,35 @@ function mouseUp (event) {
 
 }
 
+
+//获取鼠标位置
+function getPosition(event) {
+
+
+
+    let box = canvas.getBoundingClientRect();
+
+    //相对于canvas画布的位置
+    let x = (event.pageX - box.left) * (canvas.width / box.width);
+    let y = (event.pageY - box.top) * (canvas.height / box.height);
+
+    document.getElementById('x').text = x;
+    document.getElementById('y').text = y;
+
+    return {
+        x: x,
+        y: y
+    }
+}
+
+
+
+
 //鼠标双击事件
 function ondblclick() {
-    endPath();
+    isPaint = false;
+    ctx.fill();
+    ctx.closePath();
 }
 
 
@@ -121,9 +130,3 @@ function beginPath() {
 }
 
 
-//结束绘制按钮
-function endPath() {
-    isPaint = false;
-    ctx.fill();
-    ctx.closePath();
-}
