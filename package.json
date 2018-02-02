@@ -1,5 +1,5 @@
 {
-  "name": "jstemplate",
+  "name": "videoPaint",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,5 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.17.1",
-    "hls.js": "^0.8.9"
   }
 }
